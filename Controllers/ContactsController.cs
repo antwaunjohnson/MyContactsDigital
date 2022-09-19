@@ -19,12 +19,14 @@ namespace MyContactsDigital.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IImageService _imageService;
+        private readonly IAddressBookService _addressBookService;
 
-        public ContactsController(ApplicationDbContext context, UserManager<AppUser> userManager, IImageService imageService)
+        public ContactsController(ApplicationDbContext context, UserManager<AppUser> userManager, IImageService imageService, IAddressBookService addressBookService)
         {
             _context = context;
             _userManager = userManager;
             _imageService = imageService;
+            _addressBookService = addressBookService;
         }
 
         // GET: Contacts
@@ -57,10 +59,14 @@ namespace MyContactsDigital.Controllers
 
         // GET: Contacts/Create
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
+            string appUserId = _userManager.GetUserId(User);
+
+
+
             ViewData["StatesList"] = new SelectList(Enum.GetValues(typeof(States)).Cast<States>().ToList());
+            ViewData["CategoryList"] = new MultiSelectList(await _addressBookService.GetUserCategoriesAsync(appUserId), "Id", "Name");
 
 
             return View();
@@ -71,7 +77,7 @@ namespace MyContactsDigital.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,BirthDate,Address1,Address2,City,State,ZipCode,Email,PhoneNumber,ImageFile")] Contact contact)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,BirthDate,Address1,Address2,City,State,ZipCode,Email,PhoneNumber,ImageFile")] Contact contact, List<int> CategoryList)
         {
             ModelState.Remove("AppUserId");
             
@@ -93,6 +99,13 @@ namespace MyContactsDigital.Controllers
 
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
+
+                //loop over all of the selected categories
+                foreach(int categoryId in CategoryList)
+                {
+                    await _addressBookService.AddContactToCategoryAsync(categoryId, contact.Id);
+                }
+                //save each category selected to the ContactCategories table
                 return RedirectToAction(nameof(Index));
             }
             
