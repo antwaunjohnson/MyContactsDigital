@@ -18,4 +18,7 @@ public class AppUser : IdentityUser
 
     [NotMapped]
     public string? FullName { get { return $"{FirstName} {LastName}"; } }
+
+    public virtual ICollection<Contact>? Contacts { get; set; }
+    public virtual ICollection<Category>? Categories { get; set; }
 }
