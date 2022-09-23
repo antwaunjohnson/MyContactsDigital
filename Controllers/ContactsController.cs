@@ -176,12 +176,17 @@ namespace MyContactsDigital.Controllers
                 return NotFound();
             }
 
-            var contact = await _context.Contacts.FindAsync(id);
+            string appUserId = _userManager.GetUserId(User);
+
+            // var contact = await _context.Contacts.FindAsync(id);
+            var contact = await _context.Contacts.Where(c => c.Id == id && c.AppUserId == appUserId)
+                 .FirstOrDefaultAsync();
             if (contact == null)
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", contact.AppUserId);
+            ViewData["StatesList"] = new SelectList(Enum.GetValues(typeof(States)).Cast<States>().ToList());
+            ViewData["CategoryList"] = new MultiSelectList(await _addressBookService.GetUserCategoriesAsync(appUserId), "Id", "Name", await _addressBookService.GetContactCategoryIdsAsync(contact.Id));
             return View(contact);
         }
 
@@ -202,6 +207,13 @@ namespace MyContactsDigital.Controllers
             {
                 try
                 {
+                    contact.Created = DateTime.SpecifyKind(contact.Created, DateTimeKind.Utc);
+
+                    if(contact.BirthDate != null)
+                    {
+                        contact.BirthDate = DateTime.SpecifyKind(contact.BirthDate.Value, DateTimeKind.Utc);
+                    }
+                    
                     _context.Update(contact);
                     await _context.SaveChangesAsync();
                 }
