@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using MyContactsDigital.Data;
+using MyContactsDigital.Helpers;
 using MyContactsDigital.Models;
 using MyContactsDigital.Services;
 using MyContactsDigital.Services.Interfaces;
@@ -10,8 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+
+var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -28,6 +29,8 @@ builder.Services.AddScoped<IEmailSender, EmailService>();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 var app = builder.Build();
+var scope = app.Services.CreateScope();
+await DataHelper.ManageDataAsync(scope.ServiceProvider);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,6 +43,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
