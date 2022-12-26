@@ -1,14 +1,14 @@
 :root {
-    --cf-primaryColor: #0869b8;
-    --cf-primaryColorDark: #002a4e;
-    --cf-primaryColorLight: #edf5fc;
-    --cf-secondaryColor: #fff0d9;
-    --cf-secondaryColorLight: #FFF8EC;
+    --cf-primaryColor: #3A2680;
+    --cf-primaryColorDark: #0b0033;
+    --cf-primaryColorLight: #efebff;
+    --cf-secondaryColor: #ec742c;
+    --cf-secondaryColorLight: #f6c2a2;
     --cf-dark-color: #131313;
     --cf-light-gray: #d9d9d9;
     --cf-light-color: #eeeeee;
-    --cf-title-font: 'Fira Sans', sans-serif;
-    --cf-body-font: 'Roboto', sans-serif;
+    --cf-title-font: 'canto-brush', serif;
+    --cf-body-font: 'ff-good-pro-wide', sans-serif;
 }
 
 html,
@@ -38,7 +38,7 @@ body {
     .btn-outline-primary:active,
     .btn-outline-primary:focus {
         border-color: var(--cf-secondaryColor) !important;
-        background-color: var(--cf-primaryColor);
+        background-color: var(--cf-secondaryColor);
     }
 
 .btn-primary {
@@ -73,7 +73,7 @@ h4,
 h5,
 h6 {
     font-family: var(--cf-title-font);
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
@@ -100,7 +100,7 @@ main {
     font-size: 3rem;
     text-transform: uppercase;
     font-family: var(--cf-title-font);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .subtitle {
@@ -127,15 +127,22 @@ main {
 
 .sideNav {
     border-radius: 25px;
-    border-color: var(--cf-light-color);
+    border-color: var(--cf-secondaryColor);
     border-style: solid;
     border-width: 3px;
-    background-color: var(--cf-secondaryColor);
+    background-color: var(--cf-secondaryColorLight);
     padding-top: 2rem;
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
     height: fit-content;
+}
+
+
+
+img.header-img{
+    height: 690px;
+    width: 500px;
 }
 
 .editIcons {
@@ -158,7 +165,7 @@ main {
 
 .footer {
     flex-shrink: 0;
-    background-color: var(--cf-secondaryColor);
+    background-color: var(--cf-secondaryColorLight);
 }
 
 .copyright {
@@ -203,6 +210,6 @@ main {
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .heroTitle {
-        font-size: 3.5rem;
+        font-size: 3.0rem;
     }
 }

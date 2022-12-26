@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1038.85 190.18">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.1em;
+      }
+
+      .cls-2 {
+        letter-spacing: -.21em;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.1em;
+      }
+
+      .cls-5 {
+        fill: #0b0033;
+      }
+
+      .cls-5, .cls-6 {
+        font-size: 104px;
+      }
+
+      .cls-7 {
+        letter-spacing: -.09em;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+
+      .cls-6 {
+        fill: #ec742c;
+      }
+    </style>
+  </defs>
+  <text class="cls-5" transform="translate(0 86.79)"><tspan class="cls-1" x="0" y="0">m</tspan><tspan class="cls-7" x="122.1" y="0">y</tspan><tspan class="cls-3" x="221.42" y="0">con</tspan><tspan class="cls-2" x="528.32" y="0">t</tspan><tspan class="cls-4" x="600.29" y="0">a</tspan><tspan class="cls-8" x="710.32" y="0">cts.</tspan></text>
+  <text class="cls-6" transform="translate(247.09 163.66)"><tspan x="0" y="0">digi</tspan><tspan class="cls-2" x="278.61" y="0">t</tspan><tspan x="350.58" y="0">al</tspan></text>
+</svg>
