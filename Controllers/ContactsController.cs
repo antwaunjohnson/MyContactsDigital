@@ -35,6 +35,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Contacts
         [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(int categoryId, string? swalMessage = null)
         {
             ViewData["SwalMessage"] = swalMessage;
@@ -69,6 +70,7 @@ namespace MyContactsDigital.Controllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult SearchContacts(string searchString)
         {
             string appUserId = _userManager.GetUserId(User);
@@ -100,6 +102,7 @@ namespace MyContactsDigital.Controllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmailContact(int id)
         {
             string appUserId = _userManager.GetUserId(User);
@@ -128,6 +131,7 @@ namespace MyContactsDigital.Controllers
 
         [HttpPost]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmailContact(EmailContactViewModel ecvm)
         {
             if (ModelState.IsValid)
@@ -148,6 +152,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Contacts/Details/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Contacts == null)
@@ -168,6 +173,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Contacts/Create
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create()
         {
             string appUserId = _userManager.GetUserId(User);
@@ -307,6 +313,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Contacts/Delete/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Contacts == null)

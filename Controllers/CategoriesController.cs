@@ -29,6 +29,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Categories
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(string? swalMessage = null)
         {
             ViewData["SwalMessage"] = swalMessage;
@@ -70,6 +71,7 @@ namespace MyContactsDigital.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EmailCategory(EmailCategoryViewModel ecvm)
         {
             if (ModelState.IsValid)
@@ -93,6 +95,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Categories/Create
         [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
             return View();
@@ -120,6 +123,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Categories/Edit/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -181,6 +185,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Categories/Delete/5
         [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
