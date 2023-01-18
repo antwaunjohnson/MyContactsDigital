@@ -62,7 +62,7 @@ namespace MyContactsDigital.Controllers
                     .ThenBy(c => c.FirstName)
                     .ToList();
             }
-            ViewData["CategoryID"] = new SelectList(categories, "Id", "Name", categoryId);
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name", categoryId);
 
             return View(contacts);
         }
