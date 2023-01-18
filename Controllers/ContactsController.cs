@@ -42,7 +42,7 @@ namespace MyContactsDigital.Controllers
             string appUserId = _userManager.GetUserId(User);
 
             AppUser? appUser =  _context.Users?
-                .Include(c => c.Contacts)
+                .Include(c => c.Contacts!)
                 .ThenInclude(c => c.Categories)
                 .FirstOrDefault(u => u.Id == appUserId);
 
@@ -62,7 +62,7 @@ namespace MyContactsDigital.Controllers
                     .ThenBy(c => c.FirstName)
                     .ToList();
             }
-            ViewData["CategoryID"] = new SelectList(categories, "Id", "Name", categoryId);
+            ViewData["CategoryId"] = new SelectList(categories, "Id", "Name", categoryId);
 
             return View(contacts);
         }
