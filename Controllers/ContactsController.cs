@@ -38,8 +38,7 @@ namespace MyContactsDigital.Controllers
         public IActionResult Index(int categoryId, string? swalMessage = null)
         {
             ViewData["SwalMessage"] = swalMessage;
-
-            List<Contact>? contacts = new List<Contact>();
+            var contacts = new List<Contact>();
             string appUserId = _userManager.GetUserId(User);
 
             AppUser? appUser =  _context.Users?
