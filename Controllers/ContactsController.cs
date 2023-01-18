@@ -44,6 +44,7 @@ namespace MyContactsDigital.Controllers
             AppUser? appUser =  _context.Users?
                 .Include(c => c.Contacts!)
                 .ThenInclude(c => c.Categories)
+                .Include(u => u.Categories)
                 .FirstOrDefault(u => u.Id == appUserId);
 
             var categories = appUser!.Categories;
@@ -76,6 +77,7 @@ namespace MyContactsDigital.Controllers
             AppUser? appUser = _context.Users?
                 .Include(c => c.Contacts!)
                 .ThenInclude(c => c.Categories)
+                .Include(u => u.Categories)
                 .FirstOrDefault(u => u.Id == appUserId);
 
             if (String.IsNullOrEmpty(searchString))
