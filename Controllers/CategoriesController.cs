@@ -29,7 +29,7 @@ namespace MyContactsDigital.Controllers
 
         // GET: Categories
         [Authorize]
-        public async Task<IActionResult> Index(string swalMessage = null)
+        public async Task<IActionResult> Index(string? swalMessage = null)
         {
             ViewData["SwalMessage"] = swalMessage;
             string appUserId = _userManager.GetUserId(User);
