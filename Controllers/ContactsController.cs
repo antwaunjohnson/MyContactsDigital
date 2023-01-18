@@ -38,11 +38,11 @@ namespace MyContactsDigital.Controllers
         public IActionResult Index(int categoryId, string? swalMessage = null)
         {
             ViewData["SwalMessage"] = swalMessage;
-            var contacts = new List<Contact>();
+            List<Contact>? contacts = new List<Contact>();
             string appUserId = _userManager.GetUserId(User);
 
             AppUser? appUser =  _context.Users?
-                .Include(c => c.Contacts!)
+                .Include(c => c.Contacts)
                 .ThenInclude(c => c.Categories)
                 .FirstOrDefault(u => u.Id == appUserId);
 
